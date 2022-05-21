@@ -1,0 +1,99 @@
+# LeSp_E-Stores
+This is Online Electronic shopping store. Responsive Online Shopping Store Using Django, HTML, CSS, JavaScript, Bootstrap framework etc.
+
+# Projects
+
+# Used in Projets
+`HTML` `CSS` `JavaScript` `Bootstrap` `Ajax` `Jquery` `Django` `Python` `FontAwesome` `Owl Carosul`
+
+# How does a virtual environment work?
+
+We use a module named virtualenv which is a tool to create isolated Python environments. virtualenv creates a folder which contains all the necessary executables to use the packages that a Python project would need.
+
+# Installing virtualenv
+$ `pip install virtualenv`
+# Test your installation:
+$ `virtualenv --version`
+# Using virtualenv
+You can create a virtualenv using the following command:
+$ `virtualenv my_name`
+After running this command, a directory named my_name will be created. This is the directory which contains all the necessary executables to use the packages that a Python project would need. This is where Python packages will be installed.
+
+If you want to specify Python interpreter of your choice, for example Python 3, it can be done using the following command:
+
+$ `virtualenv -p /usr/bin/python3 virtualenv_name`
+
+To create a Python 2.7 virtual environment, use the following command:
+
+$ `virtualenv -p /usr/bin/python2.7 virtualenv_name`
+
+Now after creating virtual environment, you need to activate it. Remember to activate the relevant virtual environment every time you work on the project. This can be done using the following command:
+
+$ `source virtualenv_name/bin/activate`
+
+![image](https://user-images.githubusercontent.com/85377404/169666037-24f28de7-9029-45cb-8c2b-c7c55cee8c12.png)
+
+Once the virtual environment is activated, the name of your virtual environment will appear on left side of terminal. This will let you know that the virtual environment is currently active. In the image below, venv named virtual environment is active.
+
+Now you can install dependencies related to the project in this virtual environment. For example if you are using Django 1.9 for a project, you can install it like you install other packages.
+
+![image](https://user-images.githubusercontent.com/85377404/169666065-9fb5f5fe-e720-4921-bbb5-28262875dc05.png)
+
+`(virtualenv_name)$ pip install Django==1.9`
+
+The Django 1.9 package will be placed in virtualenv_name folder and will be isolated from the complete system.
+
+Once you are done with the work, you can deactivate the virtual environment by the following command:
+`(virtualenv_name)$ deactivate`
+
+![image](https://user-images.githubusercontent.com/85377404/169666096-aebd8ee4-d600-4f49-8dac-897b88ab9295.png)
+
+Now you will be back to system’s default Python installation.
+
+# Command
+
+$ `django-admin` --> Show details use in Django
+
+$ `pip freeze` --> Show install  packages on Django.
+
+$ `django-admin startproject <project_name> ` --> Create Project in Django.
+
+$ `cd <project_name>` --> Change Directory and go to project folder.
+
+$ `python3 manage.py runserver ` --> Start Django project port:8000 `http://127.0.0.1:8000`
+
+$ `python3 manage.py runserver <port_no>` --> If you want to change your project server port's  then Run this commsnds.
+##### For Example:
+$ `python3 manage.py runserver 8080`
+
+# How to migrate Default migrations
+$ `python manage.py makemigrations`
+
+$ `python manage.py migrate`
+
+# Create Superuser in Django
+$ `python manage.py createsuperuser` --> This command id Created Django Admin User.
+
+Username: <input type="text" placeholder="Username"/>
+
+Email address: <input type="email" placeholder="Username"/>
+
+Password: <input type="password" placeholder="Username"/>
+
+Password(again): <input type="password" placeholder="Username"/>
+
+# Requirments install
+$ `pip install -r <file_name> `
+
+$ `pip install django`
+
+$ `pip install django-pillow`
+
+$ `pip install django-jazzmin`
+
+$ `pip install django-tinymce`
+
+$ `pip install django-form-dynamic`
+
+
+

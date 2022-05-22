@@ -98,7 +98,7 @@
               <a class="nav-link" href="{% url 'showcart' %}" ><button type="button" class="btn btn-outline-primary position-relative  {% if request.path == '/cart/' %} active fw-bold text-light  {% endif %}">
                 <i class="fas fa-lg fa-shopping-cart"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  2
+                 {{totalitem}}
                   <span class="visually-hidden">unread messages</span>
                 </span>
               </button></a>

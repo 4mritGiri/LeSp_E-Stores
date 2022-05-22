@@ -15,7 +15,7 @@
     <div class="col-sm-8 offset-sm-1">
       {% if messages %}
       {% for message in messages %}
-      <p {% if message.tags %} class="alert alert-{{message.tages}} mb-5" {% endif %}>{{message}}</p>
+      <p {% if message.tags %} class="alert alert-{{message.tages}} mb-5 bg-success" {% endif %}>{{message}}</p>
       {% endfor %}  
       {% endif %}
       <form action="" method="post">
@@ -23,7 +23,7 @@
         {% for fm in form %}
         <div class="form-group col-lg-6 mb-3">
           {{fm.label_tag}} {{fm}}
-          <small class="text-danger">{{fm.errors|striptags}}</small>
+          <small class="text-danger bg-light">{{fm.errors|striptags}}</small>
         </div>
 
         {% endfor %}

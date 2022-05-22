@@ -25,7 +25,9 @@ $ `pip install virtualenv`
 $ `virtualenv --version`
 # Using virtualenv
 You can create a virtualenv using the following command:
+
 $ `virtualenv my_name`
+
 After running this command, a directory named my_name will be created. This is the directory which contains all the necessary executables to use the packages that a Python project would need. This is where Python packages will be installed.
 
 If you want to specify Python interpreter of your choice, for example Python 3, it can be done using the following command:

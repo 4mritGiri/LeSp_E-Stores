@@ -5,11 +5,16 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 #from platformdirs import user_config_path
-from .models import Customer, Cart, Product, OrderPlaced
-from .forms import CustomerRegistrationForm, CustomerProfileForm
+from django.conf import settings
+from django.core.mail import send_mail
+import uuid
+from .models import Customer, Cart, Product, OrderPlaced, Verification
+from .forms import CustomerRegistrationForm, CustomerProfileForm, LoginForm
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.utils.decorators import method_decorator
 
 
@@ -186,9 +191,28 @@ def laptop(request, data=None):
         totalitem = len(Cart.objects.filter(user=request.user))
     return render(request, 'app/laptop.html', {'laptop': laptop, 'totalitem': totalitem})
 
+class LogInView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'app/login.html',{'form':form})
+    def post(self, request):
+        form = LoginForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+                
+            user = authenticate(username=username, password=password)
+            pro = Verification.objects.get(user=user)
+            if pro.verify:
+                login(request, user)
+                return redirect('/profile/')
+            else:
+                messages.info(request, 'Your account is\'t verified, Please Check Your Email Account.')
+                return redirect('/accounts/login/')
+        else:
+            messages.warning(request, 'Your Username or Password is\'t Vallied. Please Enter Current Username and Password.')
+            return redirect('/accounts/login/')
 
-def login(request):
-    return render(request, 'app/login.html')
 
 
 class CustomerRegistrationView(View):
@@ -199,10 +223,28 @@ class CustomerRegistrationView(View):
     def post(self, request):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
-            messages.success(request, 'Congratulations!!. Registered Succesfully, Please Login Now!!.')
-            form.save()
-           
+            new_user = form.save()
+            uid = uuid.uuid4()
+            pro_obj = Verification(user=new_user, token=uid)
+            pro_obj.save()
+            send_email_after_registration(new_user.email, uid)
+            messages.success(request, "Your Account Created Successful, To Verifi your account Check your email.")
+            return redirect('/registration/')
         return render(request, 'app/customerregistration.html', {'form': form})
+
+def send_email_after_registration(email, token):
+	subject = "Verify Email"
+	message = f'Hi Click on the link to verify your account http://127.0.0.1:8000/account-verify/{token}'
+	from_email = settings.EMAIL_HOST_USER
+	recipient_list = [email]
+	send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
+
+def account_verify(request, token):
+	pf = Verification.objects.filter(token=token).first()
+	pf.verify = True
+	pf.save()
+	messages.success(request, "Your Account has been Verified, You can Login Now.")
+	return redirect('/accounts/login/')	
 
 # class PasswordChangeView(View):
 #     def passwordchange(request):

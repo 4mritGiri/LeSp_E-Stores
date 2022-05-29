@@ -5,7 +5,8 @@ from .models import (
     Customer,
     Product,
     Cart,
-    OrderPlaced
+    OrderPlaced,
+    Verification
 )
 
 
@@ -48,3 +49,7 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     def product_info(self, obj):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+@admin.register(Verification)
+class VerificationAdmin(admin.ModelAdmin,):
+	list_display = ['id', 'token','user', 'verify']

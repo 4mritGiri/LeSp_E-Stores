@@ -13,13 +13,14 @@ SECRET_KEY = 'django-insecure-2wx%%t+po5v&#9&q!lryn_y)f-)yqw9r4mz8yar%j(q=&2peig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    # 'adminlte3',
+    # 'adminlte3_theme',
     'app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jazzmin',
     'tinymce',
 ]
 
@@ -64,13 +66,25 @@ WSGI_APPLICATION = 'LeSpStore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lesp_db',  # find in database section
+        'USER': 'root',
+        'PASSWORD': 'Amrit02595!',
+        'HOST': 'localhost',
+        'OPTIONS': {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -120,3 +134,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_REDIRECT_URL = '/profile/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "debramja101@gmail.com"
+EMAIL_HOST_PASSWORD = "bxvosgniabiszzsy"

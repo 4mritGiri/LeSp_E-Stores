@@ -1,1 +1,0 @@
-<i class="fa-solid fa-circle-{{request.user.username|make_list|first}}"></i>

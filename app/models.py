@@ -33,22 +33,32 @@ class Customer(models.Model):
 
 
 CATEGORY_CHOICES = (
-    ('M', 'Mobile'),
-    ('L', 'Laptop'),
-    # ('TW', 'Top Wear'),
+    ('Mobile', 'Mobile'),
+    ('Laptop', 'Laptop'),
+    ('ElectronicAccessories', 'Electronic Accessories'),
     # ('BW', 'Bottom Wear'),
 )
 
+class Brand(models.Model):
+    name = models.CharField(max_length=80, null=False, blank=False)
+    def __str__(self):
+        return (self.name)
+    
+# class Category(models.Model):
+#     category = models.CharField(choices=CATEGORY_CHOICES, max_length=30)
+    
+#     def __str__(self):
+#         return (self.category)
 
 class Product(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=60)
     selling_price = models.FloatField()
     discounted_prie = models.FloatField()
-    short_description = HTMLField(max_length=300)
+    short_description = HTMLField(max_length=110)
     description = HTMLField()
-    brand = models.CharField(max_length=100)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=10)
-    product_image = models.ImageField(upload_to='productimg')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=30)
+    product_image = models.ImageField(upload_to='productimg', null=False , blank=False)
 
     def __str__(self):
         return str(self.id)
@@ -95,3 +105,4 @@ class Verification(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	token = models.CharField(max_length=150)
 	verify = models.BooleanField(default=False)
+    

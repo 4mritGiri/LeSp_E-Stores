@@ -8,7 +8,7 @@ from django.views import View
 from django.conf import settings
 from django.core.mail import send_mail
 import uuid
-from .models import Customer, Cart, Product, OrderPlaced, Verification
+from .models import Customer, Cart, Product, OrderPlaced, Verification, Brand
 from .forms import CustomerRegistrationForm, CustomerProfileForm, LoginForm
 from django.contrib import messages
 from django.db.models import Q
@@ -21,17 +21,18 @@ from django.utils.decorators import method_decorator
 class ProductView(View):
     def get(self, request):
         totalitem = 0
-        # topwears = Product.objects.filter(category='TW')
+        electronicsAssessories = Product.objects.filter(category='ElectronicAccessories')
         # bottomweres = Product.objects.filter(category='BW')
-        mobiles = Product.objects.filter(category='M')
-        laptops = Product.objects.filter(category='L')
+        mobiles = Product.objects.filter(category='Mobile')
+        laptops = Product.objects.filter(category='Laptop')
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'app/home.html', {
-            # 'topwears': topwears,
+            'electronicsAssessories': electronicsAssessories,
             # 'bottomwears': bottomweres,
             'mobiles': mobiles,
             'laptops': laptops,
+            'electronicsAssessories': electronicsAssessories,
             'totalitem': totalitem,
         })
 
@@ -170,26 +171,45 @@ def orders(request):
     return render(request, 'app/orders.html', {'order_placed': op, 'totalitem': totalitem})
 
 
-def mobile(request, data=None):
+def mobile(request):
     totalitem = 0
+    data = request.GET.get('brand')
     if data == None:
-        mobile = Product.objects.filter(category='M')
-    elif data == 'Xiaomi' or data == 'Oppo' or data == 'Apple' or data == 'Samsung' or data == 'Redmi':
-        mobile = Product.objects.filter(category='M').filter(brand=data)
+        mobile = Product.objects.filter(category='Mobile')
+    else:
+        mobile = Product.objects.filter(category='Mobile',brand__name=data)
+    brand = Brand.objects.all()
+            
+    # elif data == 'Xiaomi' or data == 'Oppo' or data == 'Apple' or data == 'Samsung' or data == 'Redmi':
+    #     mobile = Product.objects.filter(category='M').filter(brand=data)
     if request.user.is_authenticated:
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'app/mobile.html', {'mobile': mobile, 'totalitem': totalitem})
+    return render(request, 'app/mobile.html', {'mobile': mobile,'brand':brand ,'totalitem': totalitem})
 
 
-def laptop(request, data=None):
+def laptop(request):
     totalitem = 0
+    data = request.GET.get('brand')
     if data == None:
-        laptop = Product.objects.filter(category='L')
-    elif data == 'Acer' or data == 'Asus' or data == 'Apple' or data == 'Samsung' or data == 'Msi':
-        laptop = Product.objects.filter(category='L').filter(brand=data)
+        laptop = Product.objects.filter(category='Laptop')
+    else:
+        laptop = Product.objects.filter(category='Laptop',brand__name=data)
+    brand = Brand.objects.all()
     if request.user.is_authenticated:
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'app/laptop.html', {'laptop': laptop, 'totalitem': totalitem})
+    return render(request, 'app/laptop.html', {'laptop': laptop, 'brand': brand, 'totalitem': totalitem})
+
+def eAccessories(request):
+    totalitem = 0
+    data = request.GET.get('brand')
+    if data == None:
+        eAccessories = Product.objects.filter(category='ElectronicAccessories')
+    else:
+        eAccessories = Product.objects.filter(category='ElectronicAccessories',brand__name=data)
+    brand = Brand.objects.all()
+    if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
+    return render(request, 'app/eAssessories.html', {'totalitem': totalitem,'brand': brand, 'eAccessories': eAccessories})
 
 class LogInView(View):
     def get(self, request):
@@ -233,11 +253,13 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', {'form': form})
 
 def send_email_after_registration(email, token):
-	subject = "Verify Email"
-	message = f'Hi Click on the link to verify your account http://127.0.0.1:8000/account-verify/{token}'
-	from_email = settings.EMAIL_HOST_USER
-	recipient_list = [email]
-	send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
+    subject = "Verify Email"
+    message = f'Hi Click on the link to verify your account http://127.0.0.1:8000/account-verify/{token}'
+    print("\n\n")
+    print(message,"\n")
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject=subject, message=message, from_email=from_email, recipient_list=recipient_list)
 
 def account_verify(request, token):
 	pf = Verification.objects.filter(token=token).first()
@@ -267,14 +289,17 @@ def checkout(request):
             tempamount = (p.quantity * p.product.discounted_prie)
             amount += tempamount
             totalamount = amount + shipping_amount
-    if request.user.is_authenticated:
-        totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'app/checkout.html',  {
+        if request.user.is_authenticated:
+            totalitem = len(Cart.objects.filter(user=request.user))
+        return render(request, 'app/checkout.html',  {
         'add': add,
          'totalamount': totalamount, 
          'cart_items': cart_items, 
          'totalitem': totalitem
          })
+    else:
+        messages.warning(request, "Please Select your Placed Address.")
+        return redirect('/address/')
 
 
 def payment_done(request):
@@ -314,6 +339,7 @@ class ProfileView(View):
             reg.save()
             messages.success(
                 request, 'Congratulation !! Profile Update Successfully!!')
+            return redirect('/address/')
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'app/profile.html', {'form': form, 'totalitem':totalitem, 'active': 'btn-primary'})

@@ -5,7 +5,7 @@
 {% get_jazzmin_ui_tweaks as jazzmin_ui %}
 
 {% block content %}
-    <p class="login-box-msg">{{ jazzmin_settings.welcome_sign }}</p>
+    <h5 class="login-b ox-msg text-center"><span class="text-success text-decoration-underline">{{ jazzmin_settings.welcome_sign }}</span> <span class="text-info text-decoration-underline"> Admin Login</span> </h5>
     <form action="{{ app_path }}" method="post">
         {% csrf_token %}
         {% if user.is_authenticated %}

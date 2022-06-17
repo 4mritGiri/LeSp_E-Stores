@@ -69,7 +69,7 @@
   <div class="owl-carousel my-4" id="slider1">
     {% for m in mobiles %}
     <a href="{% url 'product-detail' m.id %}" class="btn bg-dark">
-      <div class="item">
+      <div class="item  view overlay zoom">
         <img class="img-fluid" src="{{m.product_image.url}}" alt="" height="300" width="auto">
         <span class="fw-bold text-light">{{m.title}}</span><br>
         <span class="fs-5 text-light">Rs. {{m.discounted_prie}}</span>
@@ -87,7 +87,7 @@
     <div class="col-sm-3">
       <div class="card mb-3">
         <div class="card-body">
-          <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
+          <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid" alt="smaple image">
         </div>
       </div>
     </div>
@@ -137,37 +137,23 @@
 </div>
 <!-- End 2nd Product Slider -->
 
-<!-- 2nd Product Slider -->
-{% comment %} 
+<!-- 3nd Product Slider -->
 <div class="mx-3">
-  <h2>LeSp-Store Top Wears</h2>
-  <!-- Slider 2 -->
-  <div class="owl-carousel" id="slider3">
-    {% for tw in topwears %}
-    <a href="{% url 'product-detail' tw.id %}" class="btn">
-      <div class="item"><img src="{{tw.product_image.url}}" alt="" height="200px"><span
-          class="fw-bold">{{tw.title}}</span><br><span class="fs-5">Rs. {{tw.discounted_prie}}</span></div>
-      <small class="fw-light text-decoration-line-through">Rs.{{tw.selling_price}}</small>
-    </a>
-
-{% endfor %}
-  </div>
-</div>
-<!-- End 2nd Product Slider -->
-
-<!-- 4nd Product Slider -->
-<div class="mx-3">
-  <h2>LeSp-Store BottomWears</h2>
-  <!-- Slider 4 -->
-  <div class="owl-carousel" id="slider4">
-    {% for bw in bottomwears %}
-    <a href="{% url 'product-detail' bw.id %}" class="btn">
-      <div class="item"><img src="{{bw.product_image.url}}" alt="" height="200px"><span
-          class="fw-bold">{{bw.title}}</span><br><span class="fs-5">Rs. {{bw.discounted_prie}}</span></div>
-      <small class="fw-light text-decoration-line-through">Rs.{{bw.selling_price}}</small>
+  <h2 class="text-info text-decoration-underline">LeSp-Store <span class="text-warning text-decoration-underline">Accessories</span></h2>
+  <!-- Slider 3 -->
+  <div class="owl-carousel my-4" id="slider3">
+    {% for l in electronicsAssessories %}
+    <a href="{% url 'product-detail' l.id %}" class="btn bg-dark">
+      <div class="item" style="border-color: blue;">
+        <img src="{{l.product_image.url}}" alt="" height="200px">
+        <span class="fw-bold text-light">{{l.title}}</span><br>
+        <span class="fs-5 text-light">Rs. {{l.discounted_prie}}</span>
+      </div>
+      <small class="fw-bold text-danger text-decoration-line-through">Rs.{{l.selling_price}}</small>
     </a>
     {% endfor %}
   </div>
 </div>
-<!-- End 4nd Product Slider --> {% endcomment %}
+<!-- End 3nd Product Slider -->
+
 {% endblock main-content %}

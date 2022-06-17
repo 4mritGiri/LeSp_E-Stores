@@ -75,25 +75,25 @@ footer{
     width: 100%;
     background: #AFAFB6;
   }
-  footer .content{
+  footer .container-fluid{
     max-width: 1800px;
     margin: auto;
     padding: 10px 40px 40px 40px;
   }
-  footer .content .top{
+  footer .container-fluid .row{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 32px;
   }
-  .content .top .logo-details{
+  .container-fluid .row .logo-details{
     color: #fff;
     font-size: 30px;
   }
-  .content .top .media-icons{
+  .container-fluid .row .media-icons{
     display: flex;
   }
-  .content .top .media-icons a{
+  .container-fluid .row .media-icons a{
     height: 40px;
     width: 40px;
     margin: 0 8px;
@@ -105,48 +105,55 @@ footer{
     text-decoration: none;
     transition: all 0.4s ease;
   }
-  .top .media-icons a:nth-child(1){
-    background: #4267B2;
-  }
-  .top .media-icons a:nth-child(1):hover{
-    color: #4267B2;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(2){
-    background: #1DA1F2;
-  }
-  .top .media-icons a:nth-child(2):hover{
-    color: #1DA1F2;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(3){
-    background: #E1306C;
-  }
-  .top .media-icons a:nth-child(3):hover{
-    color: #E1306C;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(4){
-    background: #0077B5;
-  }
-  .top .media-icons a:nth-child(4):hover{
-    color: #0077B5;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(5){
-    background: #FF0000;
-  }
-  .top .media-icons a:nth-child(5):hover{
-    color: #FF0000;
-    background: #fff;
-  }
-  .top .media-icons a:nth-child(6){
+  .row .media-icons a:nth-child(1){
     background: #090a0c;
   }
-  .top .media-icons a:nth-child(6):hover{
+  .row .media-icons a:nth-child(1):hover{
     color: #06080a;
     background: #fff;
   }
+  .row .media-icons a:nth-child(2){
+    background: #4267B2;
+  }
+  .row .media-icons a:nth-child(2):hover{
+    color: #4267B2;
+    background: #fff;
+  }
+  .row .media-icons a:nth-child(3){
+    background: #1DA1F2;
+  }
+  .row .media-icons a:nth-child(3):hover{
+    color: #1DA1F2;
+    background: #fff;
+  }
+  /* .row .media-icons a:nth-child(3){
+    background: #E1306C;
+  }
+  .row .media-icons a:nth-child(3):hover{
+    color: #E1306C;
+    background: #fff;
+  }
+  .row .media-icons a:nth-child(4){
+    background: #0077B5;
+  }
+  .row .media-icons a:nth-child(4):hover{
+    color: #0077B5;
+    background: #fff;
+  } */
+  .row .media-icons a:nth-child(4){
+    background: #FF0000;
+  }
+  .row .media-icons a:nth-child(4):hover{
+    color: #FF0000;
+    background: #fff;
+  }
+  /* .row .media-icons a:nth-child(6){
+    background: #090a0c;
+  }
+  .row .media-icons a:nth-child(6):hover{
+    color: #06080a;
+    background: #fff;
+  } */
   footer .content .link-boxes{
     width: 100%;
     display: flex;

@@ -37,8 +37,8 @@
     {% endif %}
 
     <!-- favicons -->
-    <link rel="shortcut icon" href="{% static jazzmin_settings.site_icon %}" type="image/png">
-    <link rel="icon" href="{% static jazzmin_settings.site_icon %}" sizes="32x32" type="image/png">
+    <link rel="shortcut icon" href="{% static 'app/images/logo.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'app/images/logo.png' %}" sizes="32x32" type="image/png">
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -46,16 +46,19 @@
     {% block extrastyle %} {% endblock %}
     {% block extrahead %} {% endblock %}
 </head>
-<body class="hold-transition jazzmin-login-page">
+<body class="hold-transition jazzmin-login-page bg-dark">
 
 <div class="login-box">
     <div class="login-logo">
-        <h1><img src="{% static jazzmin_settings.site_logo %}" alt="{{ jazzmin_settings.site_header }}"></h1>
+        <h2><img src="{% static 'app/images/logo1.png' %}" height="36px" width="100px" alt="{{ jazzmin_settings.site_header }}"></h2>
     </div>
 
     <div class="card">
-        <div class="card-body">
+        <div class="card-body text-light">
             {% block content %} {% endblock %}
+        </div>
+        <div class="card-body">
+            <a href="{% url 'home' %}"><span class="text-success fw-bold"><i class="fas fa-lg fa-home"></i></span> <span class="text-info fw-bold ">LeSp Store</span></a>
         </div>
     </div>
 </div>

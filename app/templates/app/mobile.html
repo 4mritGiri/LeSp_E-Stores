@@ -3,21 +3,17 @@
 {% block title %}Mobile{% endblock title %}
 {% block main-content %}
 <div class="container-fluid" style="padding-top: 95px;">
-    <h3 class="text-warning text-center text-decoration-underline mb-3">Mobile</h3>
     <div class="row">
         <div class="col-sm-3 ms-2">
             <div class="list-group mb-3">
+                
                 <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action bg-dark text-light" aria-current="true">All
                     Mobile</a>
-                <a href="{% url 'mobiledata' 'Xiaomi' %}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/mobile/Xiaomi' %}active bg-primary fw-bold{% endif %}"
-                    aria-current="true">Xiaomi Redmi
+                    {% for brand in brand %}
+                <a href="{% url 'mobile' %}?brand={{brand.name}}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == "mobile/?brand={{brand.name}}" %} active bg-primary fw-bold{% endif %}"
+                    aria-current="true">{{brand.name}}
                 </a>
-                <a href="{% url 'mobiledata' 'Oppo' %}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/mobile/Oppo' %}active bg-primary fw-bold{% endif %}"
-                    aria-current="true">Oppo </a>
-                <a href="{% url 'mobiledata' 'Apple' %}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/mobile/Apple' %}active bg-primary fw-bold{% endif %}"
-                    aria-current="true">Apple</a>
-                <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/mobile/Samsung' %}active bg-primary fw-bold{% endif %}"
-                    aria-current="true">Samsung</a>
+                {% endfor %}
             </div>
         </div>
         <div class="col-sm-8 ">
@@ -45,6 +41,8 @@
                         </div>
                     </a>
                 </div> {% endcomment %}
+                {% empty %}
+                <h3 class="text-danger pt-5">Sorry, There Is No Item's.......</h3>
                 {% endfor %}
             </div>
         </div>

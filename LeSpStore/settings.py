@@ -72,20 +72,37 @@ WSGI_APPLICATION = 'LeSpStore.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lesp_db',  # find in database section
-        'USER': 'root',
-        'PASSWORD': 'Amrit02595!',
-        'HOST': 'localhost',
-        'OPTIONS': {
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lesp_db',  # find in database section
+#         'USER': 'root',
+#         'PASSWORD': 'Amrit02595!',
+#         'HOST': 'localhost',
+#         'OPTIONS': {
+#             "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+#         }
+#     }
+# }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lesp_db',  # find in database section
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'OPTIONS': {
+#             "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+#         }
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -141,3 +158,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "debramja101@gmail.com"
 EMAIL_HOST_PASSWORD = "bxvosgniabiszzsy"
+# EMAIL_HOST_USER = "lespstore02595@gmail.com"
+# EMAIL_HOST_PASSWORD = "LeSpStore02595amrit!"

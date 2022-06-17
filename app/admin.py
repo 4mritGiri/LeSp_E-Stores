@@ -6,9 +6,23 @@ from .models import (
     Product,
     Cart,
     OrderPlaced,
-    Verification
+    Verification,
+    Brand,
 )
 
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+    list_filter = ('name',)
+    search_fields = ('name',)
+    ordering = ('name',)
+
+# @admin.register(Category)
+# class CategoryAdmin(admin.ModelAdmin):
+#     list_display = ('id','category')
+#     list_filter = ('category',)
+#     search_fields = ('category',)
+#     ordering = ('category',)
 
 @admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
@@ -53,3 +67,4 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
 @admin.register(Verification)
 class VerificationAdmin(admin.ModelAdmin,):
 	list_display = ['id', 'token','user', 'verify']
+    

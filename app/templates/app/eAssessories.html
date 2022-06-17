@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Laptop{% endblock title %}
+{% block title %}Electronics Accessories{% endblock title %}
 {% block main-content %}
 
 
@@ -8,22 +8,22 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="list-group mb-3">
-                <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action bg-dark text-light" aria-current="true">All
-                    Laptop</a>
-                    {% for brand in brand %}
-                <a href="{% url 'laptop' %}?brand={{brand.name}}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/laptop/Acer' %} active bg-primary fw-bold {% endif %}" aria-current="true">{{brand.name}}
+                <a href="{% url 'accessories' %}" class="list-group-item list-group-item-action bg-dark text-light" aria-current="true">All
+                   Accessories</a>
+                   {% for brand in brand %}
+                <a href="{% url 'accessories' %}?brand={{brand.name}}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/laptop/Acer' %} active bg-primary fw-bold {% endif %}" aria-current="true">{{brand.name}}
                 </a>
                 {% endfor %}
             </div>
         </div>
         <div class="col-sm-8">
             <div class="row">
-                {% for product in laptop %}
+                {% for product in eAccessories %}
                     <div class="col col-sm-6 mb-3">
                     <div class="card shadow-sm">
                         <a href="{% url 'product-detail' product.id %}" class="btn bg-dark">
                             <div class="item">
-                                <img class="img-fluid" src="{{product.product_image.url}}" alt="" height="300" width="250">
+                                <img class="img-fluid" src="{{product.product_image.url}}" alt="" height="200" width="180">
                             </div>
                             <div class="fw-bold  text-light">{{product.title}}</div>
                             <div class="fw-bold text-light">Rs. {{product.discounted_prie}}</div>

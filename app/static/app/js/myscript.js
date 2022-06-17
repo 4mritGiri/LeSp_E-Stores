@@ -89,5 +89,5 @@ setInterval(() => {
     a = new Date();
     date = a.toLocaleDateString(undefined, Option);
     time = a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds();
-    document.getElementById('time').innerHTML = time + "  " + date;
+    document.getElementById('time').innerHTML = time + " " + date;
 }, 1000);

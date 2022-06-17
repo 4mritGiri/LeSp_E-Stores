@@ -17,11 +17,15 @@ urlpatterns = [
     path('mobile/<slug:data>', views.mobile, name='mobiledata'),
     path('laptop/', views.laptop, name='laptop'),
     path('laptop/<slug:data>', views.laptop, name='laptopdata'),
+    
+    path('accessories/', views.eAccessories, name='accessories'),
+    path('accessories/<slug:data>', views.eAccessories, name='accessories'),
+    
     path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
     path('accounts/login/', views.LogInView.as_view(), name='login'),
 
     path('account-verify/<slug:token>', views.account_verify, name="account-verify"),
-
+    
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('passwordchange/', auth_views.PasswordChangeView.as_view(template_name='app/passwordchange.html',form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'), name='passwordchange'),
     path('passwordchangedone/', auth_views.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),

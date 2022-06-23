@@ -1,0 +1,51 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Mobile{% endblock title %}
+{% block main-content %}
+<div class="container-fluid" style="padding-top: 95px;">
+    <div class="row">
+        <div class="col-sm-3 ms-2">
+            <div class="list-group mb-3">
+                
+                <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action bg-dark text-light" aria-current="true">All
+                    Mobile</a>
+                    {% for brand in brand %}
+                <a href="{% url 'mobile' %}?brand={{brand.name}}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == "mobile/?brand={{brand.name}}" %} active bg-primary fw-bold{% endif %}"
+                    aria-current="true">{{brand.name}}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-8 ">
+            <div class="row">
+                {% for product in mobile %}
+                <div class="col col-sm-4 mb-3">
+                    <div class="card shadow-sm ">
+                        <a href="{% url 'product-detail' product.id %}" class="btn bg-dark" style="overflow: hidden;">
+                            <div class="item">
+                                <img class="" src="{{product.product_image.url}}" alt="" height="200px"><br>
+                                <span class="fw-bold text-light">{{product.title}}</span><br>
+                                <span class="fs-6 text-light">रु. {{product.discounted_prie}}</span>
+                            </div>
+                            <small class="fw-bold text-danger text-decoration-line-through">रु. {{product.selling_price}}</small>
+                        </a>
+                    </div>
+                  </div>
+                {% comment %} <div class="col-sm-4 text-center mb-4" style="padding: 0; margin:auto">
+                    <a href="{% url 'product-detail' product.id %}" class="btn">
+                        <div class="item">
+                            <img src="{{product.product_image.url}}" alt="" height="300" class="">
+                            <div class="fw-bold">{{product.title}}</div>
+                            <div class="fw-bold">{{product.discounted_prie}}</div>
+                            <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+                        </div>
+                    </a>
+                </div> {% endcomment %}
+                {% empty %}
+                <h3 class="text-danger pt-5">Sorry, There Is No Item's.......</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

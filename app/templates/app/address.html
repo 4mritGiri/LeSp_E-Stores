@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+<div class="container my-5" style="padding-top: 50px;">
+    <div class="row">
+        <h3>Welcome <span class="text-info">{{request.user.username|capfirst}} :</span> </h3>
+        <hr class="border-success border border-2">
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn"><span class=" text-white">Profile</span></a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 offset-sm-1">
+            <div class="row">
+                {% for ad in add %}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body bg-dark">
+                            <h3 class="text-center text-warning">Address {{forloop.counter}} </h3>
+                            <hr class="border-info border border-2">
+                            <h6 class="my-3"><span class="fw-bold"> Name</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-danger fw-bold">:</span> {{ad.name}} </h6>
+                            <h6 class="my-3"><span class="fw-bold"> Locality</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-danger fw-bold">:</span> {{ad.locality}} </h6>
+                            <h6 class="my-3"><span class="fw-bold"> City</span>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-danger fw-bold">:</span> {{ad.city}} </h6>
+                            <h6 class="my-3"><span class="fw-bold"> State</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-danger fw-bold">:</span> {{ad.state}} </h6>
+                            <h6 class="my-3"><span class="fw-bold"> Pin/Zipcode</span><span class="text-danger fw-bold"> : </span> {{ad.zipcode}} </h6>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

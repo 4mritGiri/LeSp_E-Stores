@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<div class="container my-5" style="padding-top: 50px;">
+  <div class="row">
+    <h3 class=" ">Welcome <span class="text-capitalize text-info">{{request.user}} :</span></h3>
+    <hr class="border-success border border-2">
+    <div class="col-sm-2 border-end">
+      <ul class="list-unstyled">
+        <li class="d-grid"><a href="{% url 'profile' %}" class="btn {{active}}">Profile</a></li>
+        <li class="d-grid"><a href="{% url 'address' %}" class="btn text-light">Address</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-8 offset-sm-1">
+      {% if messages %}
+      {% for message in messages %}
+      <p {% if message.tags %} class="alert alert-{{message.tages}} mb-5 bg-success" {% endif %}>{{message}}</p>
+      {% endfor %}  
+      {% endif %}
+      <form action="" method="post">
+        {% csrf_token %}
+        {% for fm in form %}
+        <div class="form-group col-lg-6 mb-3">
+          {{fm.label_tag}} {{fm}}
+          <small class="text-danger bg-light">{{fm.errors|striptags}}</small>
+        </div>
+
+        {% endfor %}
+        <div class="col-12 mt-3">
+          <button type="submit" class="btn btn-outline-primary mb-3" value="">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

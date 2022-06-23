@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}CheckOut{% endblock title %}
+{% block main-content %}
+<div class="container" style="padding-top: 50px;">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <h4 class="fw-bold"><a href="{% url 'home' %}">Home</a> / <a href="{% url 'showcart' %}">Cart</a> /  Order Summary</h4>
+      <hr class="border-success border border-2">
+
+      {% for item in cart_items %}
+      <div class="card mb-2 border bg-dark">
+        <div class="row mx-2">
+          <div class="card-body col-sm-7">
+            <h5><b>Product:</b> {{item.product.title}} </h5>
+            <hr>
+            <p><b>Quantity:</b> {{item.quantity}} </p>
+            <p><b>Price:</b> रु. {{item.totalCost}}</p>
+          </div>
+          <div class="col-sm-5">
+            <div class="col-sm-12 text-center align-self-center" style="padding-top: 10px;"><img
+                src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm"
+                height="150" width="150"> </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <small><b> Term and Condition:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe!Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+    </div>
+    <div class="col-sm-5 offset-sm-1">
+      <h4 class="fw-bold">Select Shipping Address</h4>
+      <hr>
+      <div class="card border bg-dark my-2">
+        <div class="card-body">
+      <p class="text-center fw-bold">Total Cost + रु. 60 = {{totalamount}}</p>
+        </div>
+      </div>
+      <form action="/paymentdone">
+        {% for ad in add %}
+        <div class="card bg-dark">
+          <div class="card-body">
+            <h5>{{ad.name}}</h5>
+            <p>{{ad.locality}}, {{ad.city}}, {{ad.state}} - {{ad.zipcode}}</p>
+          </div>
+        </div>
+        <div class="form-check mt-2 mb-4">
+          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+          <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}"> Address: {{forloop.counter}} </label>
+        </div>
+        {% endfor %}
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

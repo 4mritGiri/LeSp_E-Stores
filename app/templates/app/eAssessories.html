@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Electronics Accessories{% endblock title %}
+{% block main-content %}
+
+
+<div class="container-fluid" style="padding-top: 95px;">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group mb-3">
+                <a href="{% url 'accessories' %}" class="list-group-item list-group-item-action bg-dark text-light" aria-current="true">All
+                   Accessories</a>
+                   {% for brand in brand %}
+                <a href="{% url 'accessories' %}?brand={{brand.name}}" class="list-group-item list-group-item-action bg-dark text-light {% if request.path == '/laptop/Acer' %} active bg-primary fw-bold {% endif %}" aria-current="true">{{brand.name}}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                {% for product in eAccessories %}
+                    <div class="col col-sm-4 mb-3">
+                    <div class="card shadow-sm">
+                        <a href="{% url 'product-detail' product.id %}" class="btn bg-dark" style="overflow: hidden;">
+                            <div class="item">
+                                <img class="" src="{{product.product_image.url}}" alt="" height="200px">
+                            </div>
+                            <div class="fw-bold  text-light">{{product.title}}</div>
+                            <div class="fw-bold text-light">रु. {{product.discounted_prie}}</div>
+                            <small class="fw-bold text-danger text-decoration-line-through">रु. {{product.selling_price}}</small>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <h3 class="text-danger pt-5">Sorry, There Is No Item's.......</h3>
+                  {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

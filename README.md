@@ -115,52 +115,72 @@ $ `pip install django-form-dynamic`
 
 # ProjectScreenShot 
 
+## Home
 ![image](https://user-images.githubusercontent.com/85377404/169668675-40e42e09-898b-4f85-b806-91ac1205c51d.png)
 
 ![image](https://user-images.githubusercontent.com/85377404/169668683-73a2044f-ad52-48d8-b4f4-b48d329e4265.png)
 
 ![image](https://user-images.githubusercontent.com/85377404/169668691-63d8d07f-7044-4ca2-a37d-c83580f9764d.png)
 
+## Mobile
+
 ![image](https://user-images.githubusercontent.com/85377404/169668658-fb92867f-085f-4555-8d15-5b4478ca4258.png)
 
 ![image](https://user-images.githubusercontent.com/85377404/169668740-79e6b01a-98b0-47c2-9e07-d6b7bf16dc3c.png)
 
+## Laptops
 ![image](https://user-images.githubusercontent.com/85377404/169668745-abe317be-5c68-49ee-a406-4b49da8b0e10.png)
 
 ![image](https://user-images.githubusercontent.com/85377404/169668795-d2f1c649-0dd2-4a68-80d6-c275a1171742.png)
 
+## Profile
 ![image](https://user-images.githubusercontent.com/85377404/169668812-691d7339-1832-429d-ba1a-98d5759c3501.png)
 
+## Address
 ![image](https://user-images.githubusercontent.com/85377404/169668836-c932e2bf-4f31-4ba6-9ed4-580c37daa8fa.png)
 
+## Order
 ![image](https://user-images.githubusercontent.com/85377404/169668848-e371d80c-94e6-48ca-91a3-fe6d50edc9ef.png)
 
+## Password Change
 ![image](https://user-images.githubusercontent.com/85377404/169668856-30353c2d-aa11-493a-a98a-6938e45ca6ac.png)
 
+## Shopping Cart
 ![image](https://user-images.githubusercontent.com/85377404/169668874-78ac914f-1840-4f3a-9fa8-c3c122de04e4.png)
 
+## Order Summary
 ![image](https://user-images.githubusercontent.com/85377404/169668880-c5bbd4d4-fb25-4bc6-b86d-40489a3b2f16.png)
 
+## Registration
 ![image](https://user-images.githubusercontent.com/85377404/169668882-7e7000bb-ee9d-401b-abdb-91624935b596.png)
 
+## Login
 ![image](https://user-images.githubusercontent.com/85377404/169668891-0a7146fa-e3c0-444a-b8c8-2d30b6400163.png)
 
+## Reset Password
 ![image](https://user-images.githubusercontent.com/85377404/169668901-b7646929-bfa2-4f4f-b0ff-900bdafd0da0.png)
 
 # Admin Pannel ScreenShote
 
+## Dashboard
 ![image](https://user-images.githubusercontent.com/85377404/169668925-ab8adce5-13dc-4bf6-bd49-afb31c69f65e.png)
 
+## Carts
 ![image](https://user-images.githubusercontent.com/85377404/169668943-1a0c71b1-0225-4463-8683-d6161f684e7c.png)
 
+## Customers
 ![image](https://user-images.githubusercontent.com/85377404/169668948-eed438be-df82-432d-bceb-5b00c5b91135.png)
 
+## Order Placeds
 ![image](https://user-images.githubusercontent.com/85377404/169668960-570be13f-b196-4397-add5-970bd865c293.png)
 
+## Products
 ![image](https://user-images.githubusercontent.com/85377404/169668969-c414727a-2403-4e6d-b7e9-1948f88b26c0.png)
 
+## Users
 ![image](https://user-images.githubusercontent.com/85377404/169669081-72a8120b-b56e-4d51-9a15-3abe6f04ca85.png)
 
+## Products
 ![image](https://user-images.githubusercontent.com/85377404/169669092-6d462169-2f61-4425-bdcd-1832095db16a.png)
 
 

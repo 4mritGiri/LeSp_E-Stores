@@ -344,4 +344,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "debramja101@gmail.com"
 EMAIL_HOST_PASSWORD = "bxvosgniabiszzsy"
 # EMAIL_HOST_USER = "lespstore02595@gmail.com"
-# EMAIL_HOST_PASSWORD = "LeSpStore02595amrit!"
+# EMAIL_HOST_PASSWORD = ""

@@ -35,7 +35,7 @@
       <p class="text-center fw-bold">Total Cost + रु. 60 = {{totalamount}}</p>
         </div>
       </div>
-      <form action="/paymentdone">
+      <form action="/paymentdone" id="myform">
         {% for ad in add %}
         <div class="card bg-dark">
           <div class="card-body">
@@ -43,17 +43,69 @@
             <p>{{ad.locality}}, {{ad.city}}, {{ad.state}} - {{ad.zipcode}}</p>
           </div>
         </div>
-        <div class="form-check mt-2 mb-4">
-          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+        <div class="form-check mt-2 mb-2">
           <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}"> Address: {{forloop.counter}} </label>
+          <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}" required>
         </div>
         {% endfor %}
-        <div class="text-end">
-          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        <div class="text-end mb-2">
+          {% if add %}
+          {% comment %} <button type="submit" class="btn btn-warning mt-1 px-4 fw-bold">Continue</button> {% endcomment %}
+           <!-- Set up a container element for the button -->
+           <div class="row flex">
+            <div class="col-6" id="paypal-button-container"></div>
+              <div class="col-6" style="margin-bottom:auto;">
+                <!-- <div class="col-12 btn btn px-4 fw-bold text-white" id="payment-button" style="background-color:purple;">Pay with Khalti</div> -->
+                <button type="submit" class="col-12 btn btn px-4 fw-bold mt-1 text-white" style="background-color:teal;" >Cash On Deliver</button>
+              </div>
+
+
+           </div>
+
+            {% else %}
+          <div class="alert alert-info alert-dismissible fade show text-start" role="alert">
+            <strong>Please,</strong><br> You should Add First shipping address and Continue shopping.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <a href="{% url 'profile' %}" class="btn btn-warning mt-1 px-3 fw-bold">Add Address</a>
+          {% endif %}
         </div>
-        
+
       </form>
     </div>
   </div>
 </div>
 {% endblock main-content %}
+
+{% block payment-gateway-paypal %}
+
+ <!-- Include the PayPal JavaScript SDK -->
+ <script src="https://www.paypal.com/sdk/js?client-id=AT9nzki8L1drIKsie1VhvuBLKF__ArTCpS6xhpwrygU3vjdSEWFVwUKh-8qQdaJyQi_lNTx_2gjyk5f5&currency=USD"></script>
+
+ <script>
+     // Render the PayPal button into #paypal-button-container
+     paypal.Buttons({
+         // Set up the transaction
+          createOrder: function(data, actions) {
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      value: {{nptotal}}
+                    }
+                  }]
+                });
+          },
+         // Finalize the transaction
+         onApprove: function(data, actions) {
+             return actions.order.capture().then(function(orderData) {
+                 // Successful capture! For demo purposes:
+                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                 var transaction = orderData.purchase_units[0].payments.captures[0];
+                 alert('Transaction '+ transaction.status + ': ' + transaction.id + '\nTransaction Completed \n\n Thank you for your payment!');
+                 document.getElementById("myform").submit();
+             });
+         }
+     }).render('#paypal-button-container');
+ </script>
+
+{% endblock payment-gateway-paypal %}

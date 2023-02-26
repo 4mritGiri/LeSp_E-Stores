@@ -86,7 +86,9 @@ def show_cart(request):
                 'totalitem': totalitem
             })
         else:
-            return render(request, 'app/emptycart.html')
+            if request.user.is_authenticated:
+                totalitem = len(Cart.objects.filter(user=request.user))
+                return render(request, 'app/emptycart.html',{'totalitem': totalitem})
 
 
 def plus_cart(request):
@@ -135,7 +137,7 @@ def minus_cart(request):
 def remove_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
-        c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user)) 
+        c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
         c.delete()
         amount = 0.0
         shipping_amount = 60.0
@@ -178,7 +180,7 @@ def mobile(request):
     else:
         mobile = Product.objects.filter(category='Mobile',brand__name=data)
     brand = Brand.objects.all()
-            
+
     # elif data == 'Xiaomi' or data == 'Oppo' or data == 'Apple' or data == 'Samsung' or data == 'Redmi':
     #     mobile = Product.objects.filter(category='M').filter(brand=data)
     if request.user.is_authenticated:
@@ -219,7 +221,7 @@ class LogInView(View):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-                
+
             user = authenticate(username=username, password=password)
             pro = Verification.objects.get(user=user)
             if pro.verify:
@@ -253,13 +255,13 @@ class CustomerRegistrationView(View):
 def send_email_after_registration(email, token):
     subject = "Verify Email"
     message = f"""
-    Dear Sir/Madam, 
-    
+    Dear Sir/Madam,
+
     ATTN : Please do not reply to this email.This mailbox is not monitored and you will not receive a response.
-    
+
     Your Verification Email is Given bellow 👇
-    Click on the link to verify your account http://127.0.0.1:8000/account-verify/{token}
-    
+    Click on the link to verify your account https://lespstore.pythonanywhere.com/account-verify/{token}
+
     If you have any queries, Please contact us at,
 
     LegendSpam Store,
@@ -270,7 +272,7 @@ def send_email_after_registration(email, token):
 
     Warm Regards,
     LegendSpam Store
-    
+
     """
     print("\n\n")
     print(message,"\n")
@@ -283,7 +285,7 @@ def account_verify(request, token):
 	pf.verify = True
 	pf.save()
 	messages.success(request, "Your Account has been Verified, You can Login Now.")
-	return redirect('/accounts/login/')	
+	return redirect('/accounts/login/')
 
 # class PasswordChangeView(View):
 #     def passwordchange(request):
@@ -306,13 +308,17 @@ def checkout(request):
             tempamount = (p.quantity * p.product.discounted_prie)
             amount += tempamount
             totalamount = amount + shipping_amount
+            nptotal = round(totalamount / 132, 2)
+
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'app/checkout.html',  {
         'add': add,
-         'totalamount': totalamount, 
-         'cart_items': cart_items, 
-         'totalitem': totalitem
+         'totalamount': totalamount,
+         'cart_items': cart_items,
+         'totalitem': totalitem,
+         'nptotal': nptotal,
+         'amount': amount
          })
     else:
         messages.warning(request, "Please Select your Placed Address.")
